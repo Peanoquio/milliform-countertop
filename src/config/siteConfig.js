@@ -33,7 +33,7 @@ export const siteInfo = {
 // --- THEME SELECTION --------------------------------------------------------
 //  'light' = warm sand minimalist (default, matches the reference design)
 //  'dark'  = dramatic charcoal & brass
-export const ACTIVE_THEME = 'light';
+export const ACTIVE_THEME = 'dark';
 
 // Warm "sand" minimalist — high contrast, very readable
 export const lightTheme = {
