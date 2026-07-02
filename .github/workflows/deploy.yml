@@ -34,7 +34,13 @@ jobs:
       - name: Build GitHub Pages
         run: npm run build:ghpages
 
-      # 7. Deploy to GitHub Pages using gh-pages package
+      # 7. Configure git user (required by gh-pages)
+      - name: Configure Git User
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      # 8. Deploy to GitHub Pages using gh-pages package
       - name: Deploy with gh-pages
         run: npx gh-pages -d build
         env:
