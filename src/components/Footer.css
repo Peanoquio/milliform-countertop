@@ -1,0 +1,92 @@
+.site-footer {
+  background: var(--backgroundAlt);
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 64px 24px 40px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+  gap: 40px;
+}
+
+.footer-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.2em;
+  color: var(--textPrimary);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.footer-brand p {
+  color: var(--textSecondary);
+  font-size: 0.95rem;
+  max-width: 30ch;
+}
+
+.footer-social {
+  display: flex;
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.footer-social a {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: capitalize;
+  color: var(--textSecondary);
+}
+
+.footer-social a:hover {
+  color: var(--accent);
+}
+
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--textLight);
+  margin-bottom: 18px;
+}
+
+.footer-col ul li {
+  margin-bottom: 10px;
+}
+
+.footer-col a,
+.footer-contact li {
+  color: var(--textSecondary);
+  font-size: 0.92rem;
+}
+
+.footer-col a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 22px 24px;
+  text-align: center;
+  color: var(--textLight);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 860px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 520px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+}

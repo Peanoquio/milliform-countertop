@@ -1,0 +1,169 @@
+.page {
+  padding-top: calc(var(--header-h) + 64px);
+  padding-bottom: 96px;
+}
+
+.page-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 44px;
+}
+
+.page-head .eyebrow {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.page-head h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  margin-bottom: 16px;
+}
+
+.page-head p {
+  color: var(--textSecondary);
+  font-size: 1.05rem;
+}
+
+/* ---- Filter bar ---- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+
+.filter-chip {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--textSecondary);
+  padding: 10px 22px;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+
+.filter-chip:hover {
+  color: var(--textPrimary);
+  border-color: var(--textSecondary);
+}
+
+.filter-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0d0d0f;
+}
+
+/* ---- Finish grid ---- */
+.finish-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.finish-card {
+  background: var(--backgroundAlt);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.finish-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+}
+
+.finish-media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.finish-media .steel-fallback,
+.finish-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--speed-slow) var(--transition-easing);
+}
+
+.finish-card:hover .finish-media img,
+.finish-card:hover .finish-media .steel-fallback {
+  transform: scale(1.05);
+}
+
+.finish-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(20, 18, 16, 0.82);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  color: #fdfcfa;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  z-index: 2;
+}
+
+.finish-body {
+  padding: 26px;
+}
+
+.finish-body h3 {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.finish-spec {
+  display: block;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 1.02rem;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.finish-body p {
+  color: var(--textSecondary);
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+}
+
+.finish-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.finish-features li {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  padding: 5px 11px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--textLight);
+  padding: 48px 0;
+}
+
+.collections-cta {
+  text-align: center;
+  margin-top: 72px;
+}
+
+.collections-cta p {
+  color: var(--textSecondary);
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+}

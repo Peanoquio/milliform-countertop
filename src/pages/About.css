@@ -1,0 +1,166 @@
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-bottom: 96px;
+}
+
+.about-intro-text h2 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  margin-bottom: 22px;
+}
+
+.about-intro-text p {
+  color: var(--textSecondary);
+  margin-bottom: 16px;
+  font-size: 1.02rem;
+}
+
+.about-intro-media {
+  aspect-ratio: 4 / 5;
+}
+
+.about-intro-media .steel-fallback,
+.about-intro-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Values */
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 96px;
+}
+
+.value {
+  text-align: center;
+  padding: 40px 28px;
+  background: var(--backgroundAlt);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.value:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.value-icon {
+  font-size: 2rem;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 18px;
+}
+
+.value h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.value p {
+  color: var(--textSecondary);
+  font-size: 0.95rem;
+}
+
+/* Timeline */
+.about-timeline {
+  margin-bottom: 80px;
+}
+
+.timeline {
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 90px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border);
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 32px;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.timeline-year {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: right;
+}
+
+.timeline-content {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline-content::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 7px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--background);
+  border: 2px solid var(--accent);
+}
+
+.timeline-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.timeline-content p {
+  color: var(--textSecondary);
+  font-size: 0.95rem;
+}
+
+.about-cta {
+  text-align: center;
+  padding: 64px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.about-cta h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 28px;
+}
+
+@media (max-width: 900px) {
+  .about-intro {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .about-values {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .timeline::before {
+    left: 60px;
+  }
+  .timeline-item {
+    grid-template-columns: 60px 1fr;
+    gap: 18px;
+  }
+  .timeline-year {
+    font-size: 1.05rem;
+  }
+}
