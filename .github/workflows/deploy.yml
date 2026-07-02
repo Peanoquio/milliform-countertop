@@ -33,3 +33,9 @@ jobs:
       # 6. Execute your specific build command
       - name: Build GitHub Pages
         run: npm run build:ghpages
+
+      # 7. Deploy to GitHub Pages using gh-pages package
+      - name: Deploy with gh-pages
+        run: npx gh-pages -d build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
