@@ -15,6 +15,8 @@
 //    • switch the whole palette with ACTIVE_THEME below ('light' | 'dark')
 // =============================================================================
 
+import { imagePath } from '../utils/imageUtils';
+
 // --- BRANDING & SEO ---------------------------------------------------------
 export const siteInfo = {
   companyName: 'MILLIFORM',
@@ -134,7 +136,7 @@ export const homepage = {
     subtitle:
       'Bespoke stainless steel countertops — pore-free, seamless and built to outlast the room they live in.',
     video: { enabled: false, mp4: '', poster: '', autoplay: true, loop: true, muted: true },
-    image: '/images/hero.webp',
+    image: imagePath('/images/hero.webp'),
     buttons: [
       { text: 'Explore the Collection', link: '/collections', type: 'primary' },
       { text: 'Request a Quote', link: '/contact', type: 'outline' },
@@ -145,9 +147,9 @@ export const homepage = {
     title: 'Your workhorse in the kitchen',
     paragraphs: [
       'Every Milliform surface begins as a flat sheet of premium chrome-nickel steel and ends as a single, seamless worktop — laser-cut, precision-folded and hand-welded in our own atelier to the millimetre.',
-      'We don’t stock catalogue sizes. We measure your space, model it digitally, and fabricate one continuous piece that fits it exactly — bowls and drainers welded in by hand, with no rim to trap grime.',
+      'We don\'t stock catalogue sizes. We measure your space, model it digitally, and fabricate one continuous piece that fits it exactly — bowls and drainers welded in by hand, with no rim to trap grime.',
     ],
-    image: '/images/workshop.webp',
+    image: imagePath('/images/workshop.webp'),
     buttonText: 'Our craft',
     buttonLink: '/about',
   },
@@ -156,19 +158,19 @@ export const homepage = {
       id: 1,
       name: 'Praline Sand',
       description: 'Our signature fine brushed grain — warm, forgiving and quietly timeless.',
-      image: '/images/finish-praline.webp',
+      image: imagePath('/images/finish-praline.webp'),
     },
     {
       id: 3,
       name: 'Brûlée Mirror',
       description: 'A flawless, glazed reflective surface for statement islands and bars.',
-      image: '/images/finish-brulee.webp',
+      image: imagePath('/images/finish-brulee.webp'),
     },
     {
       id: 4,
       name: 'Vanilla Dust',
       description: 'A soft, powdery matte that shrugs off fingerprints and everyday wear.',
-      image: '/images/finish-vanilla.webp',
+      image: imagePath('/images/finish-vanilla.webp'),
     },
   ],
   // Franke-inspired pillars: quality, durability, hygiene, design
@@ -197,7 +199,7 @@ export const homepage = {
   cta: {
     title: 'Have a space in mind?',
     description:
-      'Send us drawings or a few photos with rough dimensions. We’ll come back with finish options and an estimate.',
+      'Send us drawings or a few photos with rough dimensions. We\'ll come back with finish options and an estimate.',
     buttonText: 'Start your project',
     buttonLink: '/contact',
   },
@@ -219,7 +221,7 @@ export const collections = {
       category: 'Brushed',
       description:
         'A fine, uniform directional grain with a warm satin glow. The default choice for working kitchens — it forgives everyday marks and ages gracefully.',
-      image: '/images/finish-praline.webp',
+      image: imagePath('/images/finish-praline.webp'),
       features: ['Fine hairline grain', 'Hides fingerprints', 'Most popular'],
     },
     {
@@ -229,7 +231,7 @@ export const collections = {
       category: 'Brushed',
       description:
         'An ultra-fine, long-grain brush — softer and more refined than a standard satin. A whisper of sheen across a calm, continuous surface.',
-      image: '/images/finish-creme.webp',
+      image: imagePath('/images/finish-creme.webp'),
       features: ['Long directional grain', 'Subtle sheen', 'Premium'],
     },
     {
@@ -239,7 +241,7 @@ export const collections = {
       category: 'Polished',
       description:
         'A flawless, glazed reflective finish polished to a deep shine. A dramatic statement for islands, bars and feature walls.',
-      image: '/images/finish-brulee.webp',
+      image: imagePath('/images/finish-brulee.webp'),
       features: ['High reflectivity', 'Statement piece', 'Shows marks'],
     },
     {
@@ -249,7 +251,7 @@ export const collections = {
       category: 'Textured',
       description:
         'A soft, powdery matte created with fine glass-bead media. Gentle on the eye and exceptional at masking fingerprints and light scuffs.',
-      image: '/images/finish-vanilla.webp',
+      image: imagePath('/images/finish-vanilla.webp'),
       features: ['Velvet matte', 'Fingerprint resistant', 'Contemporary'],
     },
     {
@@ -259,7 +261,7 @@ export const collections = {
       category: 'Textured',
       description:
         'A rolled three-dimensional weave that scatters light and disguises wear. A tactile, crumbled-stone surface that stays beautiful under heavy use.',
-      image: '/images/finish-streusel.webp',
+      image: imagePath('/images/finish-streusel.webp'),
       features: ['3D embossed pattern', 'Hides scratches', 'Tactile'],
     },
     {
@@ -269,7 +271,7 @@ export const collections = {
       category: 'Specialist',
       description:
         'A hand-finished, mottled patina with the depth and warmth of weathered rock. Every panel is one of a kind and develops character over time.',
-      image: '/images/finish-toffee.webp',
+      image: imagePath('/images/finish-toffee.webp'),
       features: ['Hand-finished', 'One of a kind', 'Living surface'],
     },
     {
@@ -279,7 +281,7 @@ export const collections = {
       category: 'Specialist',
       description:
         'A physical-vapour-deposited coating in deep matte cocoa-black. Scratch-hard, fingerprint-resistant and unmistakably dramatic.',
-      image: '/images/finish-cocoa.webp',
+      image: imagePath('/images/finish-cocoa.webp'),
       features: ['Coloured steel', 'Ultra-hard coating', 'Dramatic'],
     },
     {
@@ -289,7 +291,7 @@ export const collections = {
       category: 'Specialist',
       description:
         'Our toughest surface — marine-grade 316 steel with a warm granular finish. Salt-, chemical- and corrosion-proof for bars, labs and the outdoors.',
-      image: '/images/finish-mocha.webp',
+      image: imagePath('/images/finish-mocha.webp'),
       features: ['316 marine grade', 'Chemical resistant', 'Hospitality & lab'],
     },
   ],
@@ -298,7 +300,7 @@ export const collections = {
 // --- PROJECTS (cards that open a detail modal) ------------------------------
 export const projects = {
   title: 'Selected Work',
-  subtitle: 'A few of the kitchens, bars and laboratories we’ve fabricated.',
+  subtitle: 'A few of the kitchens, bars and laboratories we\'ve fabricated.',
   items: [
     {
       id: 1,
@@ -308,7 +310,7 @@ export const projects = {
       year: '2025',
       description:
         'A four-metre island in Praline Sand with a seamless integrated double sink and folded waterfall ends — one continuous, pore-free surface.',
-      image: '/images/project-tanglin.webp',
+      image: imagePath('/images/project-tanglin.webp'),
       details: [
         '4.0 m single-piece island top',
         'Hand-welded integrated double bowl',
@@ -324,7 +326,7 @@ export const projects = {
       year: '2024',
       description:
         'A nine-metre back bar in Mocha Granite marine-grade steel with welded drip trays, speed rails and a Brûlée Mirror front fascia.',
-      image: '/images/project-forge.webp',
+      image: imagePath('/images/project-forge.webp'),
       details: [
         '9 m run across three sections',
         '316 marine-grade steel (Mocha Granite)',
@@ -340,7 +342,7 @@ export const projects = {
       year: '2024',
       description:
         'Cleanroom-grade benching with coved, crevice-free welds for a molecular diagnostics facility — absolutely hygienic and easy to sanitise.',
-      image: '/images/project-helix.webp',
+      image: imagePath('/images/project-helix.webp'),
       details: [
         '22 m of continuous benching',
         'Coved, crevice-free internal welds',
@@ -356,7 +358,7 @@ export const projects = {
       year: '2023',
       description:
         'A compact galley in Streusel Stone — durable, warm under light and forgiving of daily use, with a folded upstand splashback.',
-      image: '/images/project-katong.webp',
+      image: imagePath('/images/project-katong.webp'),
       details: [
         'L-shaped run with integrated drainer',
         'Streusel Stone embossed texture',
@@ -378,7 +380,7 @@ export const about = {
       'True to that legacy, every piece is templated, modelled and fabricated in-house using laser technology and millimetre precision. Bowls and sinks are seamlessly welded by hand. Nothing is outsourced; nothing is catalogue-standard.',
       'The result is a surface that fits your room exactly, stays hygienic for life, and is built — like the best things — to last.',
     ],
-    image: '/images/about-intro.webp',
+    image: imagePath('/images/about-intro.webp'),
   },
   timeline: [
     { year: '2014', title: 'The first bench', description: 'Founded as a two-person metal shop fabricating restaurant prep benches.' },
@@ -420,7 +422,7 @@ export const navigation = {
 // --- IMAGES -----------------------------------------------------------------
 export const images = {
   logo: null, // set to '/images/logo.svg' to use an image logo instead of text
-  placeholder: '/images/placeholder.webp',
+  placeholder: imagePath('/images/placeholder.webp'),
   textures: { hero: null, section: null },
 };
 
