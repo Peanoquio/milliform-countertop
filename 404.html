@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Milliform</title>
+    <!--
+      Single Page Apps for GitHub Pages
+      Redirects deep-links to index.html, encoding the path into the query string so the
+      snippet in index.html can restore it. Harmless on Cloudflare (which uses _redirects).
+      segmentCount = 1 keeps the repo subpath (/milliform-countertop) intact.
+    -->
+    <script type="text/javascript">
+      (function () {
+        var segmentCount = 1;
+        var l = window.location;
+        l.replace(
+          l.protocol +
+            '//' +
+            l.hostname +
+            (l.port ? ':' + l.port : '') +
+            l.pathname
+              .split('/')
+              .slice(0, 1 + segmentCount)
+              .join('/') +
+            '/?/' +
+            l.pathname
+              .slice(1)
+              .split('/')
+              .slice(segmentCount)
+              .join('/')
+              .replace(/&/g, '~and~') +
+            (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+            l.hash
+        );
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
