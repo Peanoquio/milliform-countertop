@@ -1,0 +1,35 @@
+name: Build and Deploy to GitHub Pages
+
+# 1. Trigger the workflow only on a push to the main branch
+on:
+  push:
+    branches:
+      - main
+
+# 2. Grant permission to write contents back to your repository (required for gh-pages branches)
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 3. Download the repository files onto the runner
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 4. Initialize Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Match this to your local Node.js version
+          cache: 'npm'
+
+      # 5. Download your project dependencies safely
+      - name: Install Dependencies
+        run: npm ci
+
+      # 6. Execute your specific build command
+      - name: Build GitHub Pages
+        run: npm run build:ghpages
