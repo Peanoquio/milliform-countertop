@@ -1,7 +1,10 @@
 name = "milliform-countertop"
 compatibility_date = "2026-07-01"
+
 # for Cloudflare Pages deployment
 # pages_build_output_dir = "build"
+
 # for Cloudflare worker deployment
-assets = { directory = "./build" }
-main = "src/index.ts"
+[assets]
+directory = "./build"
+not_found_handling = "single-page-application"
