@@ -2,7 +2,7 @@
   "name": "milliform-countertop",
   "version": "1.0.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "/",
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

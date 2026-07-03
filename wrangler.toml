@@ -6,5 +6,5 @@ compatibility_date = "2026-07-01"
 
 # for Cloudflare worker deployment
 [assets]
-directory = "./build"
+directory = "./build/"
 not_found_handling = "single-page-application"
