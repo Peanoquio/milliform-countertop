@@ -4,11 +4,13 @@ import { ThemeProvider } from './context/ThemeContext';
 import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import AmbientBackground from './components/AmbientBackground';
 import Home from './pages/Home';
 import Collections from './pages/Collections';
 import Projects from './pages/Projects';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import { animationConfig } from './config/siteConfig';
 import './App.css';
 
 // Base path resolves automatically per host:
@@ -20,6 +22,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router basename={basename}>
+        <AmbientBackground enabled={animationConfig.enabled && animationConfig.ambientAnimation} />
         <ScrollToTop />
         <Header />
         <main>

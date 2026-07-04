@@ -109,6 +109,7 @@ export const animationConfig = {
   scrollAnimations: true,
   modalAnimations: true,
   navigationAnimations: true,
+  ambientAnimation: true, // subtle floating orbs in background
   speeds: { fast: 200, normal: 340, slow: 560, verySlow: 900 }, // ms
   easing: {
     default: 'cubic-bezier(0.22, 1, 0.36, 1)', // expressive ease-out
