@@ -7,9 +7,13 @@ import './Home.css';
 
 const Home = () => {
   const scope = useReveal();
-  const { hero, aboutPreview, featuredCollections, features, cta } = homepage;
+  const { hero, aboutPreview, features, cta } = homepage;
   const marqueeNames = collections.items.map((i) => i.name);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [randomizedFinishes] = useState(() => {
+    const shuffled = [...collections.items].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 3);
+  });
   const heroImages = hero.images || (hero.image ? [hero.image] : []);
 
   useEffect(() => {
@@ -126,7 +130,7 @@ const Home = () => {
             <h2>A surface for every space</h2>
           </div>
           <div className="featured-grid">
-            {featuredCollections.map((c, i) => (
+            {randomizedFinishes.map((c, i) => (
               <Link
                 to="/collections"
                 className="featured-card reveal"
