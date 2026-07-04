@@ -31,18 +31,26 @@
 
 .footer-social {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   margin-top: 20px;
 }
 
-.footer-social a {
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: capitalize;
+.social-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
   color: var(--textSecondary);
+  transition: color 0.3s ease;
 }
 
-.footer-social a:hover {
+.social-icon-link svg {
+  width: 100%;
+  height: 100%;
+}
+
+.social-icon-link:hover {
   color: var(--accent);
 }
 
