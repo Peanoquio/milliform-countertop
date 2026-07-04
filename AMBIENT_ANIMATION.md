@@ -17,7 +17,8 @@ The site includes a dynamic ambient background animation that adds depth and vis
 - **Highly Visible**: Bright opacity (0.55), large orbs (700-900px), strong shadows (25-42px)
 - **Configurable**: Can be toggled on/off via the animation config
 - **Performance Optimized**: Uses GPU acceleration (`will-change`, `mix-blend-mode`)
-- **Responsive**: Works on all screen sizes without performance degradation
+- **Mobile-Responsive**: Automatically disabled on tablets (≤1024px) and phones (≤768px) to preserve battery and performance
+- **Accessibility**: Respects `prefers-reduced-motion` user preference
 
 ## Configuration
 
@@ -237,12 +238,56 @@ Edit `AmbientBackground.js`:
 
 Then create corresponding CSS animations (float-4 and drift-4) in `AmbientBackground.css`.
 
+## Mobile & Responsive Behavior
+
+### Automatic Disabling on Mobile Devices
+
+The ambient animation is **automatically disabled** on smaller screens for performance and battery optimization:
+
+| Device Type | Breakpoint | Animation Status |
+|---|---|---|
+| Desktop | > 1024px | ✓ **Enabled** (full animation) |
+| Tablet | 768px - 1024px | ✗ **Disabled** (hidden with CSS) |
+| Mobile | < 768px | ✗ **Disabled** (hidden with CSS) |
+
+**CSS Breakpoints:**
+```css
+/* Tablets and above - disable for performance */
+@media (max-width: 1024px) {
+  .ambient-background {
+    display: none;
+  }
+}
+
+/* Phones - completely hide */
+@media (max-width: 768px) {
+  .ambient-background {
+    display: none !important;
+  }
+}
+```
+
+### Accessibility: Reduced Motion Preference
+
+The animation respects the `prefers-reduced-motion` media query:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orb {
+    animation: none !important;
+  }
+}
+```
+
+Users who enable "Reduce motion" in their OS settings will see the animation disabled automatically, regardless of device.
+
 ## Browser Support
 
-- Chrome/Edge: Full support with GPU acceleration
-- Firefox: Full support with GPU acceleration
-- Safari: Full support with GPU acceleration
-- Mobile: Optimized; disables with reduced motion preferences
+- Chrome/Edge: Full support with GPU acceleration (desktop only)
+- Firefox: Full support with GPU acceleration (desktop only)
+- Safari: Full support with GPU acceleration (desktop only)
+- Mobile devices: Animation disabled by default for performance
+- Reduced motion preference: Respected on all platforms
 
 ## Accessibility
 
@@ -272,11 +317,20 @@ If orbs appear but don't move/pulsate:
 
 ### Animation causing performance issues
 
-1. Reduce opacity in `.ambient-orb` (from 0.55 → 0.35)
-2. Increase blur amount in `.ambient-orb` (from 40px → 80px)
-3. Reduce drop-shadow intensity (smaller px values in @keyframes)
-4. Disable on mobile by adding `@media (max-width: 768px)` rule to hide orbs
-5. Reduce orb sizes (make 700px, 800px, 900px smaller)
+1. **Check if on mobile**: Animation is already disabled on tablets (≤1024px) and phones (≤768px)
+2. **On desktop with performance issues**:
+   - Reduce opacity in `.ambient-orb` (from 0.55 → 0.35)
+   - Increase blur amount in `.ambient-orb` (from 40px → 80px)
+   - Reduce drop-shadow intensity (smaller px values in @keyframes)
+   - Reduce orb sizes (make 700px, 800px, 900px smaller)
+3. **Force disable animation**: Lower breakpoint threshold:
+   ```css
+   @media (max-width: 1200px) {  /* Changed from 1024px */
+     .ambient-background {
+       display: none;
+     }
+   }
+   ```
 
 ### Animation movement is too fast/slow
 

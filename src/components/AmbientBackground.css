@@ -306,3 +306,28 @@ body.animations-disabled .ambient-orb {
 body.animations-disabled .ambient-gradient {
   animation: none;
 }
+
+/* Mobile responsiveness - disable on smaller screens for performance */
+@media (max-width: 1024px) {
+  .ambient-background {
+    display: none;
+  }
+}
+
+/* Tablet and phone - completely hide to save memory and battery */
+@media (max-width: 768px) {
+  .ambient-background {
+    display: none !important;
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orb {
+    animation: none !important;
+  }
+
+  .ambient-gradient {
+    animation: none !important;
+  }
+}
