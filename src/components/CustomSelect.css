@@ -1,0 +1,213 @@
+.custom-select {
+  display: block;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.custom-select .field {
+  margin-bottom: 0;
+}
+
+.custom-select .field span {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--textSecondary);
+  margin-bottom: 8px;
+}
+
+.custom-select-wrapper {
+  position: relative;
+}
+
+.custom-select-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 13px 15px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--textPrimary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  transition: var(--transition);
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.custom-select-button:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--background) 95%, var(--accent) 5%);
+}
+
+.custom-select-button:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(var(--accentRGB), 0.1);
+}
+
+.select-value {
+  text-align: left;
+  flex: 1;
+}
+
+.select-arrow {
+  font-size: 0.65rem;
+  color: var(--textSecondary);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.custom-select-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: var(--backgroundAlt);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.custom-select-search {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: var(--background);
+  color: var(--textPrimary);
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  box-sizing: border-box;
+}
+
+.custom-select-search::placeholder {
+  color: var(--textSecondary);
+}
+
+.custom-select-search:focus {
+  outline: none;
+  background: color-mix(in srgb, var(--background) 95%, var(--accent) 5%);
+}
+
+.custom-select-list {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.custom-select-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: var(--textPrimary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  text-align: left;
+  transition: var(--transition);
+}
+
+.custom-select-option:hover {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.custom-select-option.active {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.custom-select-empty {
+  padding: 16px 12px;
+  text-align: center;
+  color: var(--textSecondary);
+  font-size: 0.9rem;
+}
+
+.custom-select-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Scrollbar styling */
+.custom-select-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-select-list::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+.custom-select-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.custom-select-list::-webkit-scrollbar-thumb:hover {
+  background: var(--textSecondary);
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .custom-select-dropdown {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    width: calc(100vw - 32px);
+    max-width: 360px;
+    max-height: 70vh;
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    z-index: 2000;
+    margin-top: 0;
+  }
+
+  .custom-select-search {
+    flex-shrink: 0;
+    padding: 12px 12px;
+  }
+
+  .custom-select-list {
+    max-height: calc(70vh - 60px);
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .custom-select-option {
+    padding: 12px 12px;
+  }
+
+  .custom-select-backdrop {
+    display: block;
+  }
+}

@@ -3,6 +3,8 @@ import { contactInfo, siteInfo } from '../config/siteConfig';
 import SocialIcon from '../components/SocialIcon';
 import TurnstileWidget from '../components/TurnstileWidget';
 import Modal from '../components/Modal';
+import CountryPhoneInput, { COUNTRIES } from '../components/CountryPhoneInput';
+import CustomSelect from '../components/CustomSelect';
 import useReveal from '../hooks/useReveal';
 import './Contact.css';
 
@@ -14,6 +16,7 @@ const Contact = () => {
   const [sent, setSent] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [countryCode, setCountryCode] = useState('US');
   const turnstileRef = useRef(null);
 
   const handleChange = (e) =>
@@ -28,11 +31,15 @@ const Contact = () => {
       return;
     }
 
+    // Find dial code for the selected country
+    const selectedCountry = COUNTRIES.find((c) => c.code === countryCode) || { dialCode: '+1' };
+    const phoneWithCode = `${selectedCountry.dialCode} ${form.phone}`.trim();
+
     // No backend in a static site. Hand off to the studio inbox via a
     // pre-filled mailto so the submission is never silently lost.
     const subject = encodeURIComponent(`New enquiry — ${form.name || 'Website'}`);
     const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n` +
+      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${phoneWithCode}\n` +
         `Project type: ${form.project}\n\n${form.message}`
     );
     window.location.href = `${contactInfo.email.link}?subject=${subject}&body=${body}`;
@@ -127,6 +134,7 @@ const Contact = () => {
                   onClick={() => {
                     setSent(false);
                     setForm(initialForm);
+                    setCountryCode('US');
                     setTurnstileToken(null);
                     if (typeof window.turnstile !== 'undefined') {
                       window.turnstile.reset();
@@ -149,15 +157,12 @@ const Contact = () => {
                       required
                     />
                   </label>
-                  <label className="field">
-                    <span>Phone</span>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={form.phone}
-                      onChange={handleChange}
-                    />
-                  </label>
+                  <CountryPhoneInput
+                    value={form.phone}
+                    onChange={(phone) => setForm((f) => ({ ...f, phone }))}
+                    countryCode={countryCode}
+                    onCountryChange={setCountryCode}
+                  />
                 </div>
                 <label className="field">
                   <span>Email</span>
@@ -169,16 +174,18 @@ const Contact = () => {
                     required
                   />
                 </label>
-                <label className="field">
-                  <span>Project type</span>
-                  <select name="project" value={form.project} onChange={handleChange}>
-                    <option value="">Select…</option>
-                    <option>Residential kitchen</option>
-                    <option>Hospitality / bar</option>
-                    <option>Commercial / lab</option>
-                    <option>Other</option>
-                  </select>
-                </label>
+                <CustomSelect
+                  label="Project type"
+                  options={[
+                    { value: 'Residential kitchen', label: 'Residential kitchen' },
+                    { value: 'Hospitality / bar', label: 'Hospitality / bar' },
+                    { value: 'Commercial / lab', label: 'Commercial / lab' },
+                    { value: 'Other', label: 'Other' },
+                  ]}
+                  value={form.project}
+                  onChange={(value) => setForm((f) => ({ ...f, project: value }))}
+                  placeholder="Select…"
+                />
                 <label className="field">
                   <span>Tell us about your space</span>
                   <textarea
