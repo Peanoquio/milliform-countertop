@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { contactInfo, siteInfo } from '../config/siteConfig';
+import SocialIcon from '../components/SocialIcon';
 import useReveal from '../hooks/useReveal';
 import './Contact.css';
 
@@ -43,16 +44,31 @@ const Contact = () => {
           <aside className="contact-details reveal">
             <div className="detail-block">
               <h4>Visit the workshop</h4>
-              <p>{contactInfo.address.full}</p>
+              <div className="contact-item">
+                <span className="contact-icon">
+                  <SocialIcon name="address" />
+                </span>
+                <p>{contactInfo.address.full}</p>
+              </div>
             </div>
             <div className="detail-block">
               <h4>Talk to us</h4>
-              <p>
-                <a href={contactInfo.phone.link}>{contactInfo.phone.display}</a>
-              </p>
-              <p>
-                <a href={contactInfo.email.link}>{contactInfo.email.display}</a>
-              </p>
+              <div className="contact-item">
+                <span className="contact-icon">
+                  <SocialIcon name="phone" />
+                </span>
+                <p>
+                  <a href={contactInfo.phone.link}>{contactInfo.phone.display}</a>
+                </p>
+              </div>
+              <div className="contact-item">
+                <span className="contact-icon">
+                  <SocialIcon name="email" />
+                </span>
+                <p>
+                  <a href={contactInfo.email.link}>{contactInfo.email.display}</a>
+                </p>
+              </div>
             </div>
             <div className="detail-block">
               <h4>Opening hours</h4>
@@ -67,8 +83,16 @@ const Contact = () => {
                   {Object.entries(contactInfo.social)
                     .filter(([, v]) => v)
                     .map(([name, url]) => (
-                      <a key={name} href={url} target="_blank" rel="noopener noreferrer">
-                        {name}
+                      <a
+                        key={name}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-icon-link"
+                        title={name.charAt(0).toUpperCase() + name.slice(1)}
+                        aria-label={name}
+                      >
+                        <SocialIcon name={name} />
                       </a>
                     ))}
                 </div>
