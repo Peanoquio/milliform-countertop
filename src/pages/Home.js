@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { homepage, siteInfo, collections } from '../config/siteConfig';
 import SteelImage from '../components/SteelImage';
@@ -9,6 +9,18 @@ const Home = () => {
   const scope = useReveal();
   const { hero, aboutPreview, featuredCollections, features, cta } = homepage;
   const marqueeNames = collections.items.map((i) => i.name);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const heroImages = hero.images || (hero.image ? [hero.image] : []);
+
+  useEffect(() => {
+    if (heroImages.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, hero.imageTransitionInterval || 6000);
+
+    return () => clearInterval(interval);
+  }, [heroImages.length, hero.imageTransitionInterval]);
 
   return (
     <div className="home" ref={scope}>
@@ -26,8 +38,19 @@ const Home = () => {
             >
               <source src={hero.video.mp4} type="video/mp4" />
             </video>
+          ) : heroImages.length > 1 ? (
+            <div className="hero-carousel">
+              {heroImages.map((img, idx) => (
+                <SteelImage
+                  key={idx}
+                  src={img}
+                  alt=""
+                  className={`hero-img ${idx === currentImageIndex ? 'active' : ''}`}
+                />
+              ))}
+            </div>
           ) : (
-            <SteelImage src={hero.image} alt="" className="hero-img" />
+            <SteelImage src={heroImages[0]} alt="" className="hero-img" />
           )}
           <div className="hero-scrim" />
         </div>

@@ -11,9 +11,10 @@
     "yaml": "^2.9.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:ghpages": "PUBLIC_URL=/milliform-countertop react-scripts build",
+    "gen:hero": "node scripts/generate-hero-images.mjs",
+    "start": "npm run gen:hero && react-scripts start",
+    "build": "npm run gen:hero && react-scripts build",
+    "build:ghpages": "npm run gen:hero && PUBLIC_URL=/milliform-countertop react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy:cf": "npm run build && wrangler pages deploy build --project-name=milliform-countertop",
