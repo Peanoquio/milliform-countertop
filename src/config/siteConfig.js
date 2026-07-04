@@ -149,7 +149,7 @@ export const contactInfo = {
   },
   social: {
     instagram: 'https://instagram.com/milliform',
-    linkedin: 'https://linkedin.com/company/milliform',
+    // linkedin: 'https://linkedin.com/company/milliform',
     whatsapp: 'https://wa.me/6565432100',
   },
 };
