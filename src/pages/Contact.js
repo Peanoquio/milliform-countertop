@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { contactInfo, siteInfo } from '../config/siteConfig';
 import SocialIcon from '../components/SocialIcon';
+import TurnstileWidget from '../components/TurnstileWidget';
+import Modal from '../components/Modal';
 import useReveal from '../hooks/useReveal';
 import './Contact.css';
 
@@ -10,12 +12,22 @@ const Contact = () => {
   const scope = useReveal();
   const [form, setForm] = useState(initialForm);
   const [sent, setSent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState(null);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const turnstileRef = useRef(null);
 
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate Turnstile token
+    if (!turnstileToken) {
+      setShowErrorModal(true);
+      return;
+    }
+
     // No backend in a static site. Hand off to the studio inbox via a
     // pre-filled mailto so the submission is never silently lost.
     const subject = encodeURIComponent(`New enquiry — ${form.name || 'Website'}`);
@@ -110,7 +122,17 @@ const Contact = () => {
                   Your email client should have opened with your enquiry ready to send.
                   We’ll reply within one business day.
                 </p>
-                <button className="btn btn-outline" onClick={() => setSent(false)}>
+                <button
+                  className="btn btn-outline"
+                  onClick={() => {
+                    setSent(false);
+                    setForm(initialForm);
+                    setTurnstileToken(null);
+                    if (typeof window.turnstile !== 'undefined') {
+                      window.turnstile.reset();
+                    }
+                  }}
+                >
                   Send another
                 </button>
               </div>
@@ -167,6 +189,10 @@ const Contact = () => {
                     required
                   />
                 </label>
+                <TurnstileWidget
+                  ref={turnstileRef}
+                  onTokenChange={setTurnstileToken}
+                />
                 <button type="submit" className="btn btn-primary">
                   Send enquiry
                 </button>
@@ -190,6 +216,14 @@ const Contact = () => {
             />
           </div>
         )}
+
+        <Modal
+          isOpen={showErrorModal}
+          icon="🔒"
+          title="Captcha Verification Required"
+          message="Please complete the captcha verification before submitting the form."
+          onClose={() => setShowErrorModal(false)}
+        />
       </div>
     </div>
   );
