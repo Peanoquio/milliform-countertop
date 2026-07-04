@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect } from 'react';
-import config from '../config/siteConfig';
+import config, { ACTIVE_THEME } from '../config/siteConfig';
 
 const ThemeContext = createContext();
 
@@ -20,10 +20,11 @@ export const ThemeProvider = ({ children }) => {
       root.style.setProperty(`--${key}`, value)
     );
 
-    // Fonts
-    root.style.setProperty('--font-heading', typography.fonts.heading);
-    root.style.setProperty('--font-body', typography.fonts.body);
-    root.style.setProperty('--font-accent', typography.fonts.accent);
+    // Fonts — use theme-specific fonts if available, otherwise use global typography
+    const fonts = theme.fonts || typography.fonts;
+    root.style.setProperty('--font-heading', fonts.heading);
+    root.style.setProperty('--font-body', fonts.body);
+    root.style.setProperty('--font-accent', fonts.accent);
 
     // Animation tokens
     const on = animationConfig.enabled;
@@ -39,8 +40,8 @@ export const ThemeProvider = ({ children }) => {
 
     // Body classes for stateful styling hooks
     document.body.classList.toggle('animations-enabled', on);
-    document.body.classList.remove('theme-light', 'theme-dark');
-    document.body.classList.add(`theme-${theme.name.toLowerCase()}`);
+    document.body.classList.remove('theme-light', 'theme-darkDesert', 'theme-darkNight');
+    document.body.classList.add(`theme-${ACTIVE_THEME}`);
   }, [theme, animationConfig, typography]);
 
   return (
