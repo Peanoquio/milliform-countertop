@@ -11,7 +11,7 @@
 
 .page-head .eyebrow {
   font-family: var(--font-accent);
-  font-style: italic;
+  /* font-style: italic; */
   font-size: 1.25rem;
   color: var(--accent);
   display: block;
@@ -124,7 +124,7 @@
 .finish-spec {
   display: block;
   font-family: var(--font-accent);
-  font-style: italic;
+  /* font-style: italic; */
   font-size: 1.02rem;
   color: var(--accent);
   margin-bottom: 14px;

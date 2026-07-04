@@ -48,7 +48,7 @@ body.animations-enabled main > div {
 
 .section-head .eyebrow {
   font-family: var(--font-accent);
-  font-style: italic;
+  /* font-style: italic; */
   font-size: 1.25rem;
   color: var(--accent);
   display: block;
