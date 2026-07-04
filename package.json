@@ -18,7 +18,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy:cf": "npm run build && wrangler pages deploy build --project-name=milliform-countertop",
-    "gen:images": "node scripts/generate-images.mjs"
+    "gen:images": "node scripts/generate-images.mjs",
+    "lint": "eslint src --ext .js,.jsx",
+    "lint:fix": "eslint src --ext .js,.jsx --fix",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +43,14 @@
   "devDependencies": {
     "@google/genai": "^1.10.0",
     "gh-pages": "^6.1.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
     "sharp": "^0.33.5"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

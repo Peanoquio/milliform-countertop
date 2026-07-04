@@ -1,6 +1,4 @@
-const SocialIcon = ({ name, size = 'default' }) => {
-  const sizeClass = size === 'small' ? '20px' : '24px';
-
+const SocialIcon = ({ name }) => {
   const icons = {
     address: (
       <svg viewBox="0 0 24 24" fill="currentColor">
