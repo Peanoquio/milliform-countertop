@@ -131,7 +131,8 @@
 }
 
 .contact-map iframe {
-  filter: grayscale(0.3) contrast(1.05);
+  /* Invert colors, reduce contrast slightly, and adjust hue so roads/water look natural */
+  filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(90%) grayscale(60%);
 }
 
 @media (max-width: 900px) {
