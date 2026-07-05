@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/milliform-countertop/static/css/main.349d3def.css",
-    "main.js": "/milliform-countertop/static/js/main.e3f6f4d9.js",
+    "main.css": "/milliform-countertop/static/css/main.cf390dcb.css",
+    "main.js": "/milliform-countertop/static/js/main.a11bc1c7.js",
     "index.html": "/milliform-countertop/index.html",
-    "main.349d3def.css.map": "/milliform-countertop/static/css/main.349d3def.css.map",
-    "main.e3f6f4d9.js.map": "/milliform-countertop/static/js/main.e3f6f4d9.js.map"
+    "main.cf390dcb.css.map": "/milliform-countertop/static/css/main.cf390dcb.css.map",
+    "main.a11bc1c7.js.map": "/milliform-countertop/static/js/main.a11bc1c7.js.map"
   },
   "entrypoints": [
-    "static/css/main.349d3def.css",
-    "static/js/main.e3f6f4d9.js"
+    "static/css/main.cf390dcb.css",
+    "static/js/main.a11bc1c7.js"
   ]
 }
