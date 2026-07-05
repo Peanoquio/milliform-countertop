@@ -101,6 +101,8 @@ export const darkNightTheme = {
 const THEMES = { light: lightTheme, darkDesert: darkDesertTheme, darkNight: darkNightTheme };
 export const theme = THEMES[ACTIVE_THEME] || lightTheme;
 
+export const getTheme = (themeName) => THEMES[themeName] || lightTheme;
+
 // --- ANIMATION TOGGLES ------------------------------------------------------
 export const animationConfig = {
   enabled: true, // master switch — set false to kill all motion

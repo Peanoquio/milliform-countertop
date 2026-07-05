@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { contactInfo, siteInfo } from '../config/siteConfig';
+import { useTheme } from '../context/ThemeContext';
 import SocialIcon from '../components/SocialIcon';
 import TurnstileWidget from '../components/TurnstileWidget';
 import Modal from '../components/Modal';
@@ -12,6 +13,7 @@ const initialForm = { name: '', email: '', phone: '', project: '', message: '' }
 
 const Contact = () => {
   const scope = useReveal();
+  const { currentTheme } = useTheme();
   const [form, setForm] = useState(initialForm);
   const [sent, setSent] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState(null);
@@ -210,7 +212,7 @@ const Contact = () => {
 
         {/* Map */}
         {contactInfo.map.embedUrl && (
-          <div className="contact-map reveal">
+          <div className={`contact-map reveal ${currentTheme === 'darkNight' ? 'dark-theme' : ''}`}>
             <iframe
               title={`${siteInfo.companyName} location`}
               src={contactInfo.map.embedUrl}

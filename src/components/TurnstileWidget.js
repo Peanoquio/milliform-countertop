@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, forwardRef, useCallback } from 'react';
-import { ACTIVE_THEME } from '../config/siteConfig';
+import { useTheme } from '../context/ThemeContext';
 import './TurnstileWidget.css';
 
 const TurnstileWidget = forwardRef(({
@@ -11,8 +11,9 @@ const TurnstileWidget = forwardRef(({
   const containerRef = useRef(null);
   const tokenRef = useRef(null);
   const scriptLoadedRef = useRef(false);
+  const { currentTheme } = useTheme();
 
-  const isDarkTheme = ACTIVE_THEME.startsWith('dark');
+  const isDarkTheme = currentTheme === 'darkNight';
 
   const initializeTurnstile = useCallback(() => {
     if (typeof window.turnstile === 'undefined') {
@@ -74,6 +75,15 @@ const TurnstileWidget = forwardRef(({
   useEffect(() => {
     const container = containerRef.current;
 
+    // Remove old widget when theme changes
+    if (container && window.turnstile) {
+      try {
+        window.turnstile.remove();
+      } catch (e) {
+        // Removal error
+      }
+    }
+
     // Load Turnstile script dynamically
     const loadScript = async () => {
       // Already loaded
@@ -114,7 +124,7 @@ const TurnstileWidget = forwardRef(({
         // Cleanup error
       }
     };
-  }, [initializeTurnstile]);
+  }, [initializeTurnstile, currentTheme]);
 
   return <div ref={containerRef} className="turnstile-container" />;
 });

@@ -31,7 +31,8 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--textSecondary);
-  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .phone-input-wrapper {

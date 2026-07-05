@@ -168,6 +168,11 @@
 }
 
 .contact-map iframe {
+  filter: none;
+  transition: filter var(--speed-normal) var(--transition-easing);
+}
+
+.contact-map.dark-theme iframe {
   /* Invert colors, reduce contrast slightly, and adjust hue so roads/water look natural */
   filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(90%) grayscale(60%);
 }

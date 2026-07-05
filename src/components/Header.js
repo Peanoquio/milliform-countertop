@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { siteInfo, navigation, images } from '../config/siteConfig';
+import ThemeToggle from './ThemeToggle';
 import './Header.css';
 
 const Header = () => {
@@ -48,6 +49,7 @@ const Header = () => {
               {item.name}
             </NavLink>
           ))}
+          <ThemeToggle />
         </nav>
 
         <button
