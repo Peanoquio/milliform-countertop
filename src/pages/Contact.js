@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { contactInfo, siteInfo } from '../config/siteConfig';
 import { useTheme } from '../context/ThemeContext';
 import SocialIcon from '../components/SocialIcon';
@@ -20,6 +20,17 @@ const Contact = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [countryCode, setCountryCode] = useState('US');
   const turnstileRef = useRef(null);
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    if (mapRef.current) {
+      // Remove old theme classes
+      mapRef.current.classList.remove('dark-theme', 'light-theme');
+      // Add the appropriate theme class
+      const themeClass = currentTheme === 'darkNight' ? 'dark-theme' : 'light-theme';
+      mapRef.current.classList.add(themeClass);
+    }
+  }, [currentTheme]);
 
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -212,7 +223,10 @@ const Contact = () => {
 
         {/* Map */}
         {contactInfo.map.embedUrl && (
-          <div className={`contact-map reveal ${currentTheme === 'darkNight' ? 'dark-theme' : ''}`}>
+          <div
+            ref={mapRef}
+            className="contact-map reveal"
+          >
             <iframe
               title={`${siteInfo.companyName} location`}
               src={contactInfo.map.embedUrl}
