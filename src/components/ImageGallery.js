@@ -107,6 +107,13 @@ const ImageGallery = ({ images, title }) => {
             </button>
           </>
         )}
+
+        {/* Counter */}
+        {images.length > 1 && (
+          <div className="gallery-counter">
+            {currentIndex + 1} / {images.length}
+          </div>
+        )}
       </div>
 
       {/* Thumbnail navigation */}
@@ -122,13 +129,6 @@ const ImageGallery = ({ images, title }) => {
               <img src={image.src} alt={image.alt} />
             </button>
           ))}
-        </div>
-      )}
-
-      {/* Counter */}
-      {images.length > 1 && (
-        <div className="gallery-counter">
-          {currentIndex + 1} / {images.length}
         </div>
       )}
     </div>
