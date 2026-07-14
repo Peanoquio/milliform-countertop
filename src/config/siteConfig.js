@@ -339,7 +339,7 @@ export const projects = {
       year: '2025',
       description:
         'A four-metre island in Praline Sand with a seamless integrated double sink and folded waterfall ends — one continuous, pore-free surface.',
-      image: imagePath('/images/projects/project-tanglin.webp'),
+      image: imagePath('/images/projects/tanglin/project-tanglin.webp'),
       details: [
         '4.0 m single-piece island top',
         'Hand-welded integrated double bowl',
@@ -355,7 +355,7 @@ export const projects = {
       year: '2024',
       description:
         'A nine-metre back bar in Mocha Granite marine-grade steel with welded drip trays, speed rails and a Brûlée Mirror front fascia.',
-      image: imagePath('/images/projects/project-forge.webp'),
+      image: imagePath('/images/projects/forge/project-forge.webp'),
       details: [
         '9 m run across three sections',
         '316 marine-grade steel (Mocha Granite)',
@@ -371,7 +371,7 @@ export const projects = {
       year: '2024',
       description:
         'Cleanroom-grade benching with coved, crevice-free welds for a molecular diagnostics facility — absolutely hygienic and easy to sanitise.',
-      image: imagePath('/images/projects/project-helix.webp'),
+      image: imagePath('/images/projects/helix/project-helix.webp'),
       details: [
         '22 m of continuous benching',
         'Coved, crevice-free internal welds',
@@ -387,7 +387,7 @@ export const projects = {
       year: '2023',
       description:
         'A compact galley in Streusel Stone — durable, warm under light and forgiving of daily use, with a folded upstand splashback.',
-      image: imagePath('/images/projects/project-katong.webp'),
+      image: imagePath('/images/projects/katong/project-katong.webp'),
       details: [
         'L-shaped run with integrated drainer',
         'Streusel Stone embossed texture',

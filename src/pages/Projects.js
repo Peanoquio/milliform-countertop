@@ -1,14 +1,31 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { projects } from '../config/siteConfig';
 import SteelImage from '../components/SteelImage';
+import ImageGallery from '../components/ImageGallery';
 import useReveal from '../hooks/useReveal';
+import { loadProjectImages } from '../utils/projectImages';
 import './Projects.css';
 
 const Projects = () => {
   const [active, setActive] = useState(null);
+  const [galleryImages, setGalleryImages] = useState([]);
   const scope = useReveal();
 
   const close = useCallback(() => setActive(null), []);
+
+  useEffect(() => {
+    if (!active) {
+      setGalleryImages([]);
+      return;
+    }
+
+    const loadImages = async () => {
+      const images = await loadProjectImages(active.id);
+      setGalleryImages(images);
+    };
+
+    loadImages();
+  }, [active]);
 
   useEffect(() => {
     if (!active) return undefined;
@@ -60,7 +77,11 @@ const Projects = () => {
               ×
             </button>
             <div className="modal-media">
-              <SteelImage src={active.image} alt={active.title} label={active.title} />
+              {galleryImages.length > 0 ? (
+                <ImageGallery images={galleryImages} title={active.title} />
+              ) : (
+                <SteelImage src={active.image} alt={active.title} label={active.title} />
+              )}
             </div>
             <div className="modal-body">
               <span className="project-cat">
