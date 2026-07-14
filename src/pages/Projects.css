@@ -117,7 +117,7 @@
 
 .modal-media .gallery-container {
   flex: 1;
-  min-height: 320px;
+  min-height: 54px;
 }
 
 .modal-media .steel-fallback,
@@ -125,7 +125,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  min-height: 320px;
+  min-height: 54px;
 }
 
 .modal-body {
@@ -211,11 +211,11 @@
   }
   .modal-media .steel-fallback,
   .modal-media img {
-    min-height: 220px;
+    min-height: 46px;
     max-height: 38vh;
   }
   .modal-media .gallery-container {
-    min-height: 220px;
+    min-height: 46px;
     max-height: 38vh;
   }
   .modal-body {
