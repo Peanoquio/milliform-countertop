@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { siteInfo, contactInfo, navigation } from '../config/siteConfig';
+import { siteInfo, contactInfo, navigation, images } from '../config/siteConfig';
+import { useTheme } from '../context/ThemeContext';
 import SocialIcon from './SocialIcon';
 import './Footer.css';
 
 const year = 2026; // bump as needed; kept static to avoid runtime Date dependence
 
 const Footer = () => {
+  const { currentTheme } = useTheme();
   const { company, services } = navigation.footerLinks;
   const social = Object.entries(contactInfo.social).filter(([, url]) => url);
 
@@ -14,7 +16,9 @@ const Footer = () => {
     <footer className="site-footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          <span className="footer-logo">{siteInfo.companyName}</span>
+          {images.logo && (
+            <img src={images.logo[currentTheme]} alt={siteInfo.companyName} className="footer-logo" />
+          )}
           <p>{siteInfo.tagline}</p>
           {social.length > 0 && (
             <div className="footer-social">

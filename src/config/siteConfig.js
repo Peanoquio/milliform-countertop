@@ -450,7 +450,11 @@ export const navigation = {
 
 // --- IMAGES -----------------------------------------------------------------
 export const images = {
-  logo: null, // set to '/images/logo.svg' to use an image logo instead of text
+  logo: {
+    light: imagePath('/images/logo/milliform-logo.webp'),
+    darkNight: imagePath('/images/logo/milliform-logo-white.webp'),
+    darkDesert: imagePath('/images/logo/milliform-logo-white.webp'),
+  },
   placeholder: imagePath('/images/placeholder.webp'),
   textures: { hero: null, section: null },
 };

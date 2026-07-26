@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { siteInfo, navigation, images } from '../config/siteConfig';
+import { useTheme } from '../context/ThemeContext';
 import ThemeToggle from './ThemeToggle';
 import './Header.css';
 
@@ -8,6 +9,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { currentTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -31,10 +33,8 @@ const Header = () => {
     <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="header-inner">
         <Link to="/" className="brand" aria-label={`${siteInfo.companyName} home`}>
-          {images.logo ? (
-            <img src={images.logo} alt={siteInfo.companyName} className="brand-logo" />
-          ) : (
-            <span className="brand-text">{siteInfo.companyName}</span>
+          {images.logo && (
+            <img src={images.logo[currentTheme]} alt={siteInfo.companyName} className="brand-logo" />
           )}
         </Link>
 
