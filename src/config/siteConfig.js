@@ -131,29 +131,63 @@ export const typography = {
 
 // --- CONTACT ----------------------------------------------------------------
 export const contactInfo = {
-  address: {
-    street: '14 Forge Lane',
-    unit: 'Unit 3, Brookvale Works',
-    city: 'Singapore',
-    postalCode: '569876',
-    full: '14 Forge Lane, Unit 3, Brookvale Works, Singapore 569876',
+  addresses: [
+    {
+      id: 'singapore-showroom',
+      street: '31 Bukit Batok Crescent',
+      unit: '#01-43 The Splendour',
+      city: 'Singapore',
+      postalCode: '658070',
+      full: '31 Bukit Batok Crescent, #01-43 The Splendour, Singapore 658070',
+      country: 'Singapore',
+      isPrimary: true,
+      coordinates: { lat: 1.3524, lng: 103.7568 },
+      map: {
+        embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7436855555556!2d103.75539!3d1.35243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da04eac7e7e7e7%3A0x1234567890abcdef!2s31%20Bukit%20Batok%20Crescent!5e0!3m2!1sen!2ssg!4v1700000000000',
+      },
+    },
+    {
+      id: 'malaysia-showroom',
+      street: 'Jalan PJU5/20D',
+      unit: '56-2 The Strand',
+      city: 'Petaling Jaya, Selangor',
+      postalCode: '47810',
+      full: '56-2 The Strand, Jalan PJU5/20D, Petaling Jaya, Selangor 47810',
+      country: 'Malaysia',
+      isPrimary: false,
+      coordinates: { lat: 3.1740, lng: 101.5938 },
+      map: {
+        embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.3989!2d101.59283!3d3.17401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc5b2c7e5e5e5d%3A0xfedcba9876543210!2sThe%20Strand%20Petaling%20Jaya!5e0!3m2!1sen!2smy!4v1700000000000',
+      },
+    },
+  ],
+  phones: [
+    { display: '+65 9121 1781', link: 'tel:+6591211781', country: 'Singapore', isPrimary: true },
+    { display: '+6011 2808 9786', link: 'tel:+60112808786', country: 'Malaysia', isPrimary: false },
+  ],
+  email: { display: 'milliformdesign@gmail.com', link: 'mailto:milliformdesign@gmail.com' },
+  // Backward compatibility helpers — use first address/phone for quick access
+  get address() {
+    return this.addresses[0] || this.addresses.find(a => a.isPrimary) || {};
   },
-  phone: { display: '+65 6543 2100', link: 'tel:+6565432100' },
-  email: { display: 'studio@milliform.co', link: 'mailto:studio@milliform.co' },
-  // Google Maps > Share > Embed a map > copy the src URL
-  map: {
-    embedUrl:
-      'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127639.0!2d103.8198!3d1.3521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMS4zNTIxLCAxMDMuODE5OA!5e0!3m2!1sen!2ssg!4v1700000000000',
+  get phone() {
+    const primary = this.phones.find(p => p.isPrimary);
+    return primary || this.phones[0] || {};
+  },
+  // Map helper — returns primary address's map or first address's map
+  get map() {
+    const primaryAddr = this.addresses.find(a => a.isPrimary) || this.addresses[0];
+    return primaryAddr?.map || { embedUrl: '' };
   },
   hours: {
-    weekday: 'Mon – Fri · 9:00 – 18:00',
-    saturday: 'Sat · 10:00 – 15:00 (by appointment)',
+    // weekday: 'Mon – Fri · 9:00 – 18:00',
+    workday: 'Mon - Sat · 10:00 – 19:00 (by appointment)',
     sunday: 'Sun · Closed',
   },
   social: {
-    instagram: 'https://instagram.com/milliform',
+    instagram: 'https://instagram.com/milliform.official',
     // linkedin: 'https://linkedin.com/company/milliform',
-    whatsapp: 'https://wa.me/6565432100',
+    whatsapp: 'https://wa.me/6591211781',
   },
 };
 

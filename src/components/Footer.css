@@ -82,6 +82,30 @@
   align-items: flex-start;
 }
 
+.footer-addresses,
+.footer-phones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-addresses span {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--textSecondary);
+}
+
+.footer-phones a {
+  display: block;
+  color: var(--textSecondary);
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.footer-phones a:hover {
+  color: var(--accent);
+}
+
 .footer-contact-icon {
   display: inline-flex;
   align-items: center;

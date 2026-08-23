@@ -76,23 +76,41 @@ const Contact = () => {
           <aside className="contact-details reveal">
             <div className="detail-block">
               <h4>Visit the workshop</h4>
-              <div className="contact-item">
-                <span className="contact-icon">
-                  <SocialIcon name="address" />
-                </span>
-                <p>{contactInfo.address.full}</p>
-              </div>
+              {contactInfo.addresses && contactInfo.addresses.length > 0 && (
+                <div className="contact-locations">
+                  {contactInfo.addresses.map((addr) => (
+                    <div key={addr.id} className="contact-item">
+                      <span className="contact-icon">
+                        <SocialIcon name="address" />
+                      </span>
+                      <div>
+                        <p>{addr.full}</p>
+                        {addr.country && <p className="location-country">{addr.country}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="detail-block">
               <h4>Talk to us</h4>
-              <div className="contact-item">
-                <span className="contact-icon">
-                  <SocialIcon name="phone" />
-                </span>
-                <p>
-                  <a href={contactInfo.phone.link}>{contactInfo.phone.display}</a>
-                </p>
-              </div>
+              {contactInfo.phones && contactInfo.phones.length > 0 && (
+                <div className="contact-phones">
+                  {contactInfo.phones.map((phone) => (
+                    <div key={phone.link} className="contact-item">
+                      <span className="contact-icon">
+                        <SocialIcon name="phone" />
+                      </span>
+                      <div>
+                        <p>
+                          <a href={phone.link}>{phone.display}</a>
+                        </p>
+                        {phone.country && <p className="phone-country">{phone.country}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
               <div className="contact-item">
                 <span className="contact-icon">
                   <SocialIcon name="email" />
@@ -104,8 +122,8 @@ const Contact = () => {
             </div>
             <div className="detail-block">
               <h4>Opening hours</h4>
-              <p>{contactInfo.hours.weekday}</p>
-              <p>{contactInfo.hours.saturday}</p>
+              {/* <p>{contactInfo.hours.weekday}</p> */}
+              <p>{contactInfo.hours.workday}</p>
               <p>{contactInfo.hours.sunday}</p>
             </div>
             {Object.entries(contactInfo.social).some(([, v]) => v) && (

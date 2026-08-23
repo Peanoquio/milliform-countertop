@@ -68,18 +68,30 @@ const Footer = () => {
         <div className="footer-col">
           <h4>Visit</h4>
           <ul className="footer-contact">
-            <li className="footer-contact-item">
-              <span className="footer-contact-icon">
-                <SocialIcon name="address" />
-              </span>
-              <span>{contactInfo.address.full}</span>
-            </li>
-            <li className="footer-contact-item">
-              <span className="footer-contact-icon">
-                <SocialIcon name="phone" />
-              </span>
-              <a href={contactInfo.phone.link}>{contactInfo.phone.display}</a>
-            </li>
+            {contactInfo.addresses && contactInfo.addresses.length > 0 && (
+              <li className="footer-contact-item">
+                <span className="footer-contact-icon">
+                  <SocialIcon name="address" />
+                </span>
+                <div className="footer-addresses">
+                  {contactInfo.addresses.map((addr) => (
+                    <span key={addr.id}>{addr.full}</span>
+                  ))}
+                </div>
+              </li>
+            )}
+            {contactInfo.phones && contactInfo.phones.length > 0 && (
+              <li className="footer-contact-item">
+                <span className="footer-contact-icon">
+                  <SocialIcon name="phone" />
+                </span>
+                <div className="footer-phones">
+                  {contactInfo.phones.map((p) => (
+                    <a key={p.link} href={p.link}>{p.display}</a>
+                  ))}
+                </div>
+              </li>
+            )}
             <li className="footer-contact-item">
               <span className="footer-contact-icon">
                 <SocialIcon name="email" />
