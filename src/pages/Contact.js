@@ -16,8 +16,10 @@ const Contact = () => {
   const { currentTheme } = useTheme();
   const [form, setForm] = useState(initialForm);
   const [sent, setSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [countryCode, setCountryCode] = useState('US');
   const turnstileRef = useRef(null);
   const mapRef = useRef(null);
@@ -35,7 +37,7 @@ const Contact = () => {
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate Turnstile token
@@ -44,19 +46,51 @@ const Contact = () => {
       return;
     }
 
+    setIsSubmitting(true);
+    setErrorMessage('');
+
     // Find dial code for the selected country
     const selectedCountry = COUNTRIES.find((c) => c.code === countryCode) || { dialCode: '+1' };
     const phoneWithCode = `${selectedCountry.dialCode} ${form.phone}`.trim();
 
-    // No backend in a static site. Hand off to the studio inbox via a
-    // pre-filled mailto so the submission is never silently lost.
-    const subject = encodeURIComponent(`New enquiry — ${form.name || 'Website'}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${phoneWithCode}\n` +
-        `Project type: ${form.project}\n\n${form.message}`
-    );
-    window.location.href = `${contactInfo.email.link}?subject=${subject}&body=${body}`;
-    setSent(true);
+    // Prepare form data
+    const submissionData = {
+      name: form.name,
+      email: form.email,
+      phone: phoneWithCode,
+      projectType: form.project,
+      message: form.message,
+      captchaToken: turnstileToken,
+      timestamp: new Date().toISOString(),
+    };
+
+    try {
+      const response = await fetch('https://milli-form.com/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.statusText}`);
+      }
+
+      setSent(true);
+      setForm(initialForm);
+      setCountryCode('US');
+      setTurnstileToken(null);
+      if (typeof window.turnstile !== 'undefined') {
+        window.turnstile.reset();
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setErrorMessage(error.message || 'Failed to send enquiry. Please try again.');
+      setShowErrorModal(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -231,8 +265,12 @@ const Contact = () => {
                   ref={turnstileRef}
                   onTokenChange={setTurnstileToken}
                 />
-                <button type="submit" className="btn btn-primary">
-                  Send enquiry
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send enquiry'}
                 </button>
               </form>
             )}
@@ -260,10 +298,16 @@ const Contact = () => {
 
         <Modal
           isOpen={showErrorModal}
-          icon="🔒"
-          title="Captcha Verification Required"
-          message="Please complete the captcha verification before submitting the form."
-          onClose={() => setShowErrorModal(false)}
+          icon={errorMessage ? '⚠' : '🔒'}
+          title={errorMessage ? 'Submission Failed' : 'Captcha Verification Required'}
+          message={
+            errorMessage ||
+            'Please complete the captcha verification before submitting the form.'
+          }
+          onClose={() => {
+            setShowErrorModal(false);
+            setErrorMessage('');
+          }}
         />
       </div>
     </div>
