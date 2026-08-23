@@ -34,14 +34,68 @@ const Contact = () => {
     }
   }, [currentTheme]);
 
-  const handleChange = (e) =>
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // Input validation and sanitization
+    let sanitized = value;
+
+    if (name === 'name' || name === 'email' || name === 'message') {
+      // Limit input length
+      const maxLength = name === 'message' ? 2000 : name === 'email' ? 254 : 100;
+      sanitized = value.slice(0, maxLength);
+
+      // Remove any HTML tags to prevent XSS
+      sanitized = sanitized.replace(/<[^>]*>/g, '');
+    }
+
+    setForm((f) => ({ ...f, [name]: sanitized }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // SECURITY NOTE: Backend should implement:
+    // 1. Verify Turnstile token validity via Cloudflare API
+    // 2. Use parameterized queries/prepared statements to prevent SQL injection
+    // 3. Validate and sanitize all input on server side (never trust client-side validation)
+    // 4. Implement rate limiting (e.g., max 5 submissions per IP per hour)
+    // 5. Store logs of submissions for audit trail
+    // 6. Use HTTPS only (enforce HSTS headers)
+    // 7. Validate email before sending confirmation
+    // 8. Implement CSRF tokens if not using SameSite cookies
+
     // Validate Turnstile token
     if (!turnstileToken) {
+      setShowErrorModal(true);
+      return;
+    }
+
+    // Validate form input
+    if (!form.name || !form.email || !form.phone || !form.project || !form.message) {
+      setErrorMessage('Please fill in all required fields.');
+      setShowErrorModal(true);
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      setErrorMessage('Please enter a valid email address.');
+      setShowErrorModal(true);
+      return;
+    }
+
+    // Validate phone format (basic: at least 7 digits)
+    const phoneDigits = form.phone.replace(/\D/g, '');
+    if (phoneDigits.length < 7) {
+      setErrorMessage('Please enter a valid phone number.');
+      setShowErrorModal(true);
+      return;
+    }
+
+    // Validate message length
+    if (form.message.trim().length < 10) {
+      setErrorMessage('Please provide a message with at least 10 characters.');
       setShowErrorModal(true);
       return;
     }
@@ -191,8 +245,8 @@ const Contact = () => {
                 <span className="success-icon">◈</span>
                 <h3>Thank you.</h3>
                 <p>
-                  Your email client should have opened with your enquiry ready to send.
-                  We’ll reply within one business day.
+                  Awesome! It is great that you are reaching out to us.
+                  Looking forward to your enquiry and we will respond to you the soonest.
                 </p>
                 <button
                   className="btn btn-outline"
@@ -242,9 +296,11 @@ const Contact = () => {
                 <CustomSelect
                   label="Project type"
                   options={[
-                    { value: 'Residential kitchen', label: 'Residential kitchen' },
-                    { value: 'Hospitality / bar', label: 'Hospitality / bar' },
-                    { value: 'Commercial / lab', label: 'Commercial / lab' },
+                    { value: 'Residential (HDB)', label: 'Residential (HDB)' },
+                    { value: 'Residential (Condo)', label: 'Residential (Condo)' },
+                    { value: 'Residential (Landed)', label: 'Residential (Landed)' },
+                    { value: 'Hospitality', label: 'Hospitality' },
+                    { value: 'Commercial', label: 'Commercial' },
                     { value: 'Other', label: 'Other' },
                   ]}
                   value={form.project}
